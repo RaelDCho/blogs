@@ -1,5 +1,8 @@
 import { Link } from 'react-router-dom'
 
+import { Button } from '@mui/material'
+import { Delete as DeleteIcon } from '@mui/icons-material'
+
 const BlogView = ({ blog, user, handleLike, deleteBlog }) => {
 
   if (!blog) {
@@ -38,7 +41,7 @@ const BlogView = ({ blog, user, handleLike, deleteBlog }) => {
   return (
     <div style={blogStyle} className='blog'>
       <div style={blogLine}>
-        <h2>{blog.author}: {blog.title}</h2>
+        <h3>{blog.author}: {blog.title}</h3>
       </div>
       <div style={blogLine}>
         <h4>by {blog.user && blog.user.name}</h4>
@@ -50,7 +53,8 @@ const BlogView = ({ blog, user, handleLike, deleteBlog }) => {
         likes: {blog.likes} <button onClick={() => likeBlog(blog.id)}>👍🏻</button>
       </div>
       <div>
-        {user && (user.username === blog.user.username) ? <button onClick={() => removeBlog(blog.id)}>delete</button> : ''}
+        {user && (user.username === blog.user.username) 
+          ? <Button variant='outlined' color='error' startIcon={<DeleteIcon />} onClick={() => removeBlog(blog.id)}>delete</Button> : ''}
       </div>
     </div>
   )

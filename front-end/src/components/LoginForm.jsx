@@ -5,7 +5,7 @@ import { Box, Button, TextField } from '@mui/material'
 
 import Notification from './Notification'
 
-const LoginForm = (props) => {
+const LoginForm = ({ handleLogin }) => {
   const navigate = useNavigate()
 
   const [username, setUsername] = useState('')
@@ -14,12 +14,12 @@ const LoginForm = (props) => {
   const login = async event => {
     event.preventDefault()
 
-    props.handleLogin({
+    handleLogin({
       username: username,
       password: password
     })
 
-    navigate('/')
+    navigate('/') // stop going to home screen on error
     setUsername('')
     setPassword('')
   }
@@ -30,14 +30,9 @@ const LoginForm = (props) => {
     setPassword('')
   }
 
-  const button = {
-    margin: 10
-  }
-
   return (
-    <Box component='form' onSubmit={login} >
+    <Box component='form' sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' } }} onSubmit={login} >
       <h3>Login Page</h3>
-      {props.notification && <Notification notification={props.notification} messageType={props.messageType} />}
       {/* <form onSubmit={login}> */}
         <div>
           <TextField
@@ -65,10 +60,10 @@ const LoginForm = (props) => {
             onChange={event => setPassword(event.target.value)}
           />
         </div>
-        <Button onClick={cancelLogin} variant='outlined'>
+        <Button onClick={cancelLogin} variant='outlined' style={{ margin: 5 }}>
           cancel
         </Button>
-        <Button type='submit' variant='contained' style={button}>
+        <Button type='submit' variant='contained' style={{ margin: 5 }}>
           login
         </Button>
       {/* </form> */}

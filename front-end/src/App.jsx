@@ -31,17 +31,9 @@ const App = () => {
 
   // user inputs
   const [user, setUser] = useState(null)
-  // const [username, setUsername] = useState('')
-  // const [password, setPassword] = useState('')
-
-  // blog inputs
-  // const [title, setTitle] = useState('')
-  // const [author, setAuthor] = useState('')
-  // const [url, setUrl] = useState('')
 
   // notifications and error messages
   const [notification, setNotification] = useState(null)
-  const [messageType, setMessageType] = useState(false) // false if error, true if success
 
   useEffect(() => {
     blogService.getAll().then(blogs => {
@@ -59,22 +51,6 @@ const App = () => {
       blogService.setToken(user.token)
     }
   }, [])
-
-  // input onchange to parse to BlogForm child component
-  // unused now that we are using useRef and useImperativeHandle
-  // const parseOnChange = {
-  //   handleTitle: event => {
-  //     setTitle(event.target.value)
-  //   },
-
-  //   handleAuthor: () => {
-  //     setAuthor(event.target.value)
-  //   },
-
-  //   handleUrl: () => {
-  //     setUrl(event.target.value)
-  //   }
-  // }
 
   // useMatch to get id of blog to then pass to Blog component
   const match = useMatch('/blogs/:id')
@@ -98,13 +74,10 @@ const App = () => {
       // setUsername('')
       // setPassword('')
     } catch {
-      setMessageType(false)
       console.log('error occurred in login')
-      setNotification('error: invalid credentials')
+      setNotification({ text: 'error: invalid credentials', type: 'error' })
       setTimeout(() => setNotification(null), 3000)
     }
-
-    // console.log(messageType)
   }
 
   const handleLogout = async () => {
@@ -119,31 +92,13 @@ const App = () => {
 
   // add function
   const addBlog = blogObject => {
-    // event.preventDefault()
-
-    // const blogObject = {
-    //   title: title,
-    //   author: author,
-    //   url: url,
-    //   user: user.username
-    // }
-
-    // blogFormRef.current.toggleVisibility()
-
     blogService.create(blogObject).then(returnedBlog => {
       setBlogs(blogs.concat(returnedBlog))
 
-      // // clean up input fields
-      // setTitle('')
-      // setAuthor('')
-      // setUrl('')
-
       // set notification messages
-      setNotification(`added blog ${returnedBlog.title}`)
-      setMessageType(true)
+      setNotification({ text: `added blog ${returnedBlog.title}`, type:'success' })
     }).catch(error => {
-      setNotification(error)
-      setMessageType(false)
+      setNotification({ text: error, type: 'error' })
     })
 
     setTimeout(() => { setNotification(null) }, 3000)
@@ -161,8 +116,7 @@ const App = () => {
     blogService.update(id, likedBlog).then(returnedBlog => {
       setBlogs(blogs.map(blog => blog.id === id ? likedBlog : blog))
     }).catch(error => {
-      setNotification(error)
-      setMessageType(false)
+      setNotification({ text: error, type: 'error' })
       setTimeout(() => {
         setNotification(null)
       }, 3000)
@@ -176,11 +130,9 @@ const App = () => {
     blogService.remove(id).then(response => {
       console.log(`removed ${id}`)
       setBlogs(blogs.filter(blog => blog.id !== id))
-      setNotification(`${removeBlog.title} has been removed.`)
-      setMessageType(true)
+      setNotification({ text: `${removeBlog.title} has been removed.`, type: 'success' })
     }).catch(error => {
-      setNotification(`${error}`)
-      setMessageType(false)
+      setNotification({ text: error, type: 'error' })
     })
 
     setTimeout(() => {
@@ -199,20 +151,6 @@ const App = () => {
     padding: 5
   }
 
-  // if (!user) {
-  //   return (
-  //     <div className='login-page'>
-  //       <LoginForm
-  //         handleLogin={handleLogin}
-  //         notification={notification}
-  //         messageType={messageType}
-  //       />
-  //     </div>
-  //   )
-  // }
-  // when user is logged out, header should show a button for logging in, and no name
-  // when button for logging in is pressed, there should be a togglable for a form
-  // when user is logged in, header should show a welcome message and button for logging out
   return (
     <div className='site'>
       {/* LINKS HEADER */}
@@ -227,8 +165,7 @@ const App = () => {
         </Toolbar>
       </AppBar>
 
-      {/* HEADING */}
-      <h3>Welcome, {user ? user.name : 'Guest'}!</h3>
+      <Notification notification={notification} />
 
       {/* ROUTES */}
       <Routes>
@@ -239,7 +176,7 @@ const App = () => {
           <BlogForm createBlog={addBlog} username={user ? user.username : ''} />
         } />}
         <Route path='/login' element={
-          <LoginForm handleLogin={handleLogin} messageType={messageType} />
+          <LoginForm handleLogin={handleLogin} />
         } />
         <Route path='/blogs/:id' element={
           <BlogView blog={blog} user={user} handleLike={handleLike} deleteBlog={deleteBlog} />

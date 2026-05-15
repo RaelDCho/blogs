@@ -2,6 +2,9 @@ import { Link } from 'react-router-dom'
 
 import Togglable from './Togglable'
 
+import { Button } from '@mui/material'
+import { Delete as DeleteIcon } from '@mui/icons-material'
+
 const Blog = ({ blog, user, handleLike, deleteBlog }) => {
   const blogStyle = {
     padding: 10,
@@ -48,7 +51,8 @@ const Blog = ({ blog, user, handleLike, deleteBlog }) => {
           likes: {blog.likes} <button onClick={() => likeBlog(blog.id)}>👍🏻</button>
         </div>
         <div>
-          {user && (user.username === blog.user.username) ? <button onClick={() => removeBlog(blog.id)}>delete</button> : ''}
+          {user && (user.username === blog.user.username) 
+            ? <Button variant='outlined' color='error' startIcon={<DeleteIcon />} onClick={() => removeBlog(blog.id)}>delete</Button> : ''}
         </div>
       </Togglable>
     </div>

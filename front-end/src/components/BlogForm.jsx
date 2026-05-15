@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import { Button, TextField } from '@mui/material'
+
 const BlogForm = (props) => {
   const navigate = useNavigate()
 
@@ -38,28 +40,41 @@ const BlogForm = (props) => {
 
   return (
     <>
+      <h3>Create a New Blog</h3>
       <form onSubmit={addBlog}>
         <div>
-          <label>
-            title:
-            <input value={title} onChange={event => setTitle(event.target.value)} />
-          </label>
+          <TextField
+            label='title'
+            required
+            size='small'
+            style={{ marginBottom: 10 }}
+            value={title}
+            variant='outlined'
+            onChange={event => setTitle(event.target.value)} />
         </div>
         <div>
-          <label>
-            author:
-            <input value={author} onChange={event => setAuthor(event.target.value)}/>
-          </label>
+          <TextField
+            label='author'
+            required
+            size='small'
+            style={{ marginBottom: 10 }}
+            value={author}
+            variant='outlined'
+            onChange={event => setAuthor(event.target.value)} />
         </div>
         <div>
-          <label>
-            url:
-            <input value={url} onChange={event => setUrl(event.target.value)} />
-          </label>
+          <TextField
+            label='url'
+            required
+            size='small'
+            style={{ marginBottom: 10 }}
+            value={url}
+            variant='outlined'
+            onChange={event => setUrl(event.target.value)} />
         </div>
-        <button type='submit'>create</button>
+        <Button variant='outlined' style={{ margin: 5 }} onClick={cleanUp}>cancel</Button>
+        <Button variant='contained' style={{ margin: 5 }} type='submit'>create</Button>
       </form>
-      <button onClick={cleanUp}>cancel</button>
     </>
   )
 }
