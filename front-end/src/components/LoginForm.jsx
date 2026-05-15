@@ -19,7 +19,7 @@ const LoginForm = ({ handleLogin }) => {
       password: password
     })
 
-    navigate('/') // stop going to home screen on error
+    // navigate('/') // stop going to home screen on error
     setUsername('')
     setPassword('')
   }

@@ -10,7 +10,7 @@ const Notification = ({ notification, messageType }) => {
     // <div className='notification-message' id={messageType ? 'success' : 'error'}>
     //   <p>{notification ? notification.message : ''}</p>
     // </div>
-    <Alert icon={<CheckIcon />} severity={notification.type} style={{ margin: 10 }}>
+    <Alert icon={notification.type === 'success' ? <CheckIcon /> : ''} severity={notification.type} style={{ margin: 10 }}>
       {notification.text}
     </Alert>
   )

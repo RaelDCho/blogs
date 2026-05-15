@@ -5,7 +5,7 @@ import blogService from './services/blogs'
 import loginService from './services/login'
 
 // navigation
-import { BrowserRouter as Router, useMatch, Routes, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, useNavigate, useMatch, Routes, Route, Link } from 'react-router-dom'
 
 // components
 // import Header from './components/Header'
@@ -21,7 +21,8 @@ import Togglable from './components/Togglable'
 import Footer from './components/util/Footer'
 
 // css
-import { AppBar, Button, Toolbar } from '@mui/material'
+import { AppBar, Button, IconButton, Toolbar } from '@mui/material'
+import { Menu } from '@mui/icons-material'
 
 // css
 import './assets/BlogApp.css'
@@ -71,8 +72,7 @@ const App = () => {
       blogService.setToken(user.token)
       console.log(`hello ${user.name}`)
       setUser(user)
-      // setUsername('')
-      // setPassword('')
+      useNavigate('/')
     } catch {
       console.log('error occurred in login')
       setNotification({ text: 'error: invalid credentials', type: 'error' })
@@ -156,6 +156,10 @@ const App = () => {
       {/* LINKS HEADER */}
       <AppBar position='static'>
         <Toolbar>
+          {/* EXPAND MENU ICON - NOT FINISHED YET */}
+          <IconButton color='inherit'>
+            <Menu />
+          </IconButton>
           <Button color='inherit' component={Link} to='/' style={style}>home</Button>
           
           {user && <Button color='inherit' component={Link} to='/create' style={padding}>new blog</Button>}
