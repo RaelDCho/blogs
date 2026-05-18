@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 
 import { Button } from '@mui/material'
-import { Delete as DeleteIcon } from '@mui/icons-material'
+import { Delete as DeleteIcon, ThumbUpOffAlt as ThumbsUp } from '@mui/icons-material'
 
 const BlogView = ({ blog, user, handleLike, deleteBlog }) => {
 

@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react'
 // services
 import blogService from './services/blogs'
 import loginService from './services/login'
+import userService from './services/users'
 
 // navigation
 import { BrowserRouter as Router, useNavigate, useMatch, Routes, Route, Link } from 'react-router-dom'
@@ -14,6 +15,7 @@ import BlogView from './components/BlogView'
 import LoginForm from './components/LoginForm'
 import BlogList from './components/BlogList'
 import BlogForm from './components/BlogForm'
+import UserForm from './components/UserForm'
 
 // util components
 import Notification from './components/Notification'
@@ -21,7 +23,7 @@ import Togglable from './components/Togglable'
 import Footer from './components/util/Footer'
 
 // css
-import { AppBar, Button, IconButton, Toolbar } from '@mui/material'
+import { AppBar, Box, Button, IconButton, Toolbar } from '@mui/material'
 import { Menu } from '@mui/icons-material'
 
 // css
@@ -35,6 +37,8 @@ const App = () => {
 
   // notifications and error messages
   const [notification, setNotification] = useState(null)
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     blogService.getAll().then(blogs => {
@@ -57,6 +61,15 @@ const App = () => {
   const match = useMatch('/blogs/:id')
   const blog = match ? blogs.find(blog => blog.id === match.params.id) : null
 
+  // create a user
+  const createUser = async userObject => {
+    userService.create(userObject).then(response => {
+      // something here
+    }).catch(error => {
+      setNotification({ text: error, type: 'error' })
+    })
+  }
+
   // Login and Logout functions
   const handleLogin = async userObject => {
     event.preventDefault()
@@ -72,7 +85,7 @@ const App = () => {
       blogService.setToken(user.token)
       console.log(`hello ${user.name}`)
       setUser(user)
-      useNavigate('/')
+      navigate('/')
     } catch {
       console.log('error occurred in login')
       setNotification({ text: 'error: invalid credentials', type: 'error' })
@@ -157,15 +170,20 @@ const App = () => {
       <AppBar position='static'>
         <Toolbar>
           {/* EXPAND MENU ICON - NOT FINISHED YET */}
-          <IconButton color='inherit'>
-            <Menu />
-          </IconButton>
-          <Button color='inherit' component={Link} to='/' style={style}>home</Button>
-          
-          {user && <Button color='inherit' component={Link} to='/create' style={padding}>new blog</Button>}
-          {!user
+          <Box sx={{ flexGrow: 1 }}>
+            <IconButton color='inherit'>
+              <Menu />
+            </IconButton>
+            <Button color='inherit' component={Link} to='/' style={style}>Home</Button>
+            
+            {user ? <Button color='inherit' component={Link} to='/create' style={padding}>Create Blog</Button>
+              : <Button color='inherit' component={Link} to='/create-account' style={padding}> Create Account</Button>}
+          </Box>
+          <Box sx={{ flexGrow: 0 }}>
+            {!user
             ? <Button color='inherit' component={Link} to='/login' style={padding}>login</Button>
-            : <Button color='inherit' onClick={handleLogout}>logout</Button>}
+            : <Button color='inherit' onClick={handleLogout} style={padding}>logout</Button>}
+          </Box>
         </Toolbar>
       </AppBar>
 
@@ -176,9 +194,13 @@ const App = () => {
         <Route path='/' element={
           <BlogList blogs={blogs} user={user} handleLike={handleLike} deleteBlog={deleteBlog} />
         } />
-        {user && <Route path='/create' element={
-          <BlogForm createBlog={addBlog} username={user ? user.username : ''} />
-        } />}
+        {user 
+          ? <Route path='/create' element={
+            <BlogForm createBlog={addBlog} username={user ? user.username : ''} />
+          } /> 
+          : <Route path='/create-account' element={
+            <UserForm createUser={createUser} />
+          } />}
         <Route path='/login' element={
           <LoginForm handleLogin={handleLogin} />
         } />

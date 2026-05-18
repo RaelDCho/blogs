@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { Button, TextField } from '@mui/material'
+import { Box, Button, TextField } from '@mui/material'
 
-const BlogForm = (props) => {
+const BlogForm = ({ createBlog, username }) => {
   const navigate = useNavigate()
 
   const [title, setTitle] = useState('')
@@ -14,21 +14,14 @@ const BlogForm = (props) => {
     // stop form from submitting and thus refreshing page
     event.preventDefault()
 
-    props.createBlog({
+    createBlog({
       title: title,
       author: author,
       url: url,
-      user: props.username,
+      user: username,
     })
 
-    // back to main page
-    // navigate('/')
-
-    // // clean up input fields
-    // setTitle('')
-    // setAuthor('')
-    // setUrl('')
-    cleanUp()
+    cleanUp() // might have to move this to app component
   }
 
   const cleanUp = () => {
@@ -38,8 +31,20 @@ const BlogForm = (props) => {
     setUrl('')
   }
 
+  const box = {
+    display: 'grid',
+    border: '2px solid gray',
+    borderRadius: 5,
+    boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+    height: '60dvh',
+    width: '70dvh',
+    margin: 'auto',
+    marginTop: '5%',
+    placeItems: 'center'
+  }
+
   return (
-    <>
+    <Box style={box}>
       <h3>Create a New Blog</h3>
       <form onSubmit={addBlog}>
         <div>
@@ -75,7 +80,7 @@ const BlogForm = (props) => {
         <Button variant='outlined' style={{ margin: 5 }} onClick={cleanUp}>cancel</Button>
         <Button variant='contained' style={{ margin: 5 }} type='submit'>create</Button>
       </form>
-    </>
+    </Box>
   )
 }
 

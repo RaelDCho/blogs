@@ -3,9 +3,25 @@ import { Link } from 'react-router-dom'
 import Togglable from './Togglable'
 
 import { Button } from '@mui/material'
-import { Delete as DeleteIcon } from '@mui/icons-material'
+import { Delete as DeleteIcon, ThumbUpOffAlt as ThumbsUp } from '@mui/icons-material'
 
 const Blog = ({ blog, user, handleLike, deleteBlog }) => {
+  // functionalities
+  const likeBlog = id => {
+    if (user) {
+      handleLike(blog.id)
+    } else {
+      console.log('user is not logged in')
+    }
+  }
+
+  const removeBlog = id => {
+    if (window.confirm(`Remove blog: ${blog.title} by ${blog.author}?`)) {
+      deleteBlog(id)
+    }
+  }
+
+  // css
   const blogStyle = {
     padding: 10,
     border: '2px solid gray',
@@ -21,20 +37,6 @@ const Blog = ({ blog, user, handleLike, deleteBlog }) => {
     padding: 10
   }
 
-  const likeBlog = id => {
-    if (user) {
-      handleLike(blog.id)
-    } else {
-      console.log('user is not logged in')
-    }
-  }
-
-  const removeBlog = id => {
-    if (window.confirm(`Remove blog: ${blog.title} by ${blog.author}?`)) {
-      deleteBlog(id)
-    }
-  }
-
   return (
     <div style={blogStyle} className='blog'>
       <div style={blogLine}>
@@ -48,12 +50,13 @@ const Blog = ({ blog, user, handleLike, deleteBlog }) => {
           <Link to={`/blogs/${blog.id}`}>{blog.url}</Link>
         </div>
         <div style={blogLine}>
-          likes: {blog.likes} <button onClick={() => likeBlog(blog.id)}>👍🏻</button>
+          likes: {blog.likes}
         </div>
-        <div>
-          {user && (user.username === blog.user.username) 
-            ? <Button variant='outlined' color='error' startIcon={<DeleteIcon />} onClick={() => removeBlog(blog.id)}>delete</Button> : ''}
-        </div>
+        {user && <div style={blogLine}>
+          <Button variant='outlined' style={{ margin: 5 }} onClick={() => likeBlog(blog.id)}><ThumbsUp /></Button>
+          {(user.username === blog.user.username)
+            ? <Button variant='outlined' color='error' style={{ margin: 5 }} onClick={() => removeBlog(blog.id)}><DeleteIcon /></Button> : ''}
+        </div>}
       </Togglable>
     </div>
   )

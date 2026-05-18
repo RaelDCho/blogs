@@ -30,8 +30,21 @@ const LoginForm = ({ handleLogin }) => {
     setPassword('')
   }
 
+  const box = {
+    display: 'grid',
+    border: '2px solid gray',
+    borderRadius: 5,
+    boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+    height: '60dvh',
+    width: '70dvh',
+    margin: 'auto',
+    marginTop: '5%',
+    placeItems: 'center'
+  }
+
   return (
-    <Box component='form' sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' } }} onSubmit={login} >
+    <Box component='form' sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' } }}
+      style={box} onSubmit={login} >
       <h3>Login Page</h3>
       {/* <form onSubmit={login}> */}
         <div>
@@ -60,12 +73,14 @@ const LoginForm = ({ handleLogin }) => {
             onChange={event => setPassword(event.target.value)}
           />
         </div>
-        <Button onClick={cancelLogin} variant='outlined' style={{ margin: 5 }}>
-          cancel
-        </Button>
-        <Button type='submit' variant='contained' style={{ margin: 5 }}>
-          login
-        </Button>
+        <div>
+          <Button onClick={cancelLogin} variant='outlined' style={{ margin: 5 }}>
+            cancel
+          </Button>
+          <Button type='submit' variant='contained' style={{ margin: 5 }}>
+            login
+          </Button>
+        </div>
       {/* </form> */}
     </Box>
   )
