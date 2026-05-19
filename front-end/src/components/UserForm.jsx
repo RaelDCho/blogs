@@ -1,12 +1,16 @@
-import { useState } from "react"
+import { useState } from 'react'
+
+import { useNavigate } from 'react-router-dom'
 
 import { Box, Button, TextField } from '@mui/material'
-import { BorderStyle } from "@mui/icons-material"
+import { BorderStyle } from '@mui/icons-material'
 
 const UserForm = ({ createUser }) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [name, setName] = useState('')
+
+  const navigate = useNavigate()
 
   const createAccount = async event => {
     event.preventDefault()
@@ -22,9 +26,9 @@ const UserForm = ({ createUser }) => {
 
   const cleanUp = () => {
     navigate('/')
-    setTitle('')
-    setAuthor('')
-    setUrl('')
+    setUsername('')
+    setPassword('')
+    setName('')
   }
 
   const box = {
@@ -63,7 +67,8 @@ const UserForm = ({ createUser }) => {
         </div>
         <div style={{ margin: 5 }}>
           <Button variant='outlined'
-            style={{ marginRight: 5 }}>cancel</Button>
+            style={{ marginRight: 5 }}
+            onClick={cleanUp}>cancel</Button>
           <Button variant='contained' onClick={cleanUp}>create</Button>
         </div>
       </form>

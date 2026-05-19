@@ -54,7 +54,7 @@ describe('<Blog />', async () => {
   test('pressing like button twice calls event handler received as prop twice', async () => {
     const user = userEvent.setup()
     const button = screen.getByText('👍🏻')
-    
+
     for (let i = 0; i < 2; i++) {
       await user.click(button)
     }
