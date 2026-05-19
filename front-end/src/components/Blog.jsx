@@ -42,12 +42,9 @@ const Blog = ({ blog, user, handleLike, deleteBlog }) => {
       <div style={blogLine}>
         {blog.title} by {blog.author}
       </div>
-      <Togglable buttonLabel='view'>
+      <Togglable buttonLabel='view' blogId={blog.id}>
         <div style={blogLine}>
           {blog.user && blog.user.name}
-        </div>
-        <div style={blogLine}>
-          <Link to={`/blogs/${blog.id}`}>{blog.url}</Link>
         </div>
         <div style={blogLine}>
           likes: {blog.likes}

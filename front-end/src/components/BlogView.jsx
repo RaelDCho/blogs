@@ -1,13 +1,14 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { Button } from '@mui/material'
 import { Delete as DeleteIcon, ThumbUpOffAlt as ThumbsUp } from '@mui/icons-material'
 
 const BlogView = ({ blog, user, handleLike, deleteBlog }) => {
-
   if (!blog) {
     return null
   }
+
+  const navigate = useNavigate()
 
   const blogStyle = {
     padding: 10,
@@ -40,6 +41,7 @@ const BlogView = ({ blog, user, handleLike, deleteBlog }) => {
 
   return (
     <div style={blogStyle} className='blog'>
+      <Button variant='outlined' onClick={() => navigate('/')}>Back</Button>
       <div style={blogLine}>
         <h3>{blog.author}: {blog.title}</h3>
       </div>
@@ -50,7 +52,10 @@ const BlogView = ({ blog, user, handleLike, deleteBlog }) => {
         <a href={blog.url}>{blog.url}</a>
       </div>
       <div style={blogLine}>
-        likes: {blog.likes} <button onClick={() => likeBlog(blog.id)}>👍🏻</button>
+        likes: {blog.likes}
+      </div>
+      <div style={blogLine}>
+        <Button variant='outlined' onClick={() => likeBlog(blog.id)}><ThumbsUp /></Button>
       </div>
       <div>
         {user && (user.username === blog.user.username) 
