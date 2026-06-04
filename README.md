@@ -105,7 +105,7 @@ Install Frontend Dependencies
 
 
 ## Security Features
-- JWT Authentication
+- jsonwebtoken (JWT) Authentication
 - Password Hashing with Bcrypt
 - Protected API Routes
 - Input Validation
