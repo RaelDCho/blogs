@@ -110,7 +110,7 @@ Install Frontend Dependencies
 - Protected API Routes
 - Input Validation
 - Environment Variable Configuration
-- Sequelize Query Parameterization
+<!-- - Sequelize Query Parameterization -->
 
 
 ## Future Enhancements
