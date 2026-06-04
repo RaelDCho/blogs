@@ -109,7 +109,7 @@ Install Frontend Dependencies
 - Password Hashing with Bcrypt
 - Protected API Routes
 - Input Validation
-- Environment Variable Configuration
+<!-- - Environment Variable Configuration -->
 <!-- - Sequelize Query Parameterization -->
 
 
