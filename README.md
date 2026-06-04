@@ -43,7 +43,23 @@ A modern full-stack blogging platform built with React, Axios, Node.js, Express,
 - supertest
 
 ## Database Setup
-Database was set up through Docker and PSQL
+Database was set up through Docker and PSQL.
+
+Creating a new PSQL container:
+
+`docker run -e POSTGRES_PASSWORD=postgrespassword -p PORT:PORT postgres`
+
+
+Running an existing PSQL container:
+
+`docker ps -al`
+
+`docker start -i CONTAINER_ID_OR_NAME`
+
+
+Running an interactive terminal with the PSQL server (on a new CLI window):
+
+`docker exec -it CONTAINER_ID_OR_NAME psql -U postgres postgres`
 
 
 ## Installation

@@ -7,7 +7,7 @@ const { Blog, User } = require('../models')
 // middleware functions
 const { isAdmin, tokenExtractor } = require('../util/middleware')
 
-router.get('/', async (req, res) => {
+router.get('/', async (request, response) => {
   const users = await User.findAll({
     include: {
       model: Blog,
@@ -16,12 +16,12 @@ router.get('/', async (req, res) => {
       }
     }
   })
-  res.json(users)
+  response.json(users)
 })
 
-router.post('/', async (req, res) => {
+router.post('/', async (request, response) => {
   try {
-    const { password } = req.body
+    const { password } = request.body
 
     if (password.length < 3) {
       return response.status(400).json({ error: 'password length does not meet the minimum required length' })
@@ -30,15 +30,15 @@ router.post('/', async (req, res) => {
     const saltRounds = 10
     const passwordHash = await bcrypt.hash(password, saltRounds)
 
-    const user = await User.create({...req.body, passwordHash: passwordHash})
-    res.json(user)
+    const user = await User.create({ ...request.body, passwordHash: passwordHash })
+    response.json(user)
   } catch(error) {
-    return status(400).json({ error })
+    return response.status(400).json({ error })
   }
 })
 
-router.get('/:id', async (req, res) => {
-  const user = await User.findByPk(req.params.id, {
+router.get('/:id', async (request, response) => {
+  const user = await User.findByPk(request.params.id, {
     include: {
       model: Blog,
       attributes: {
@@ -48,9 +48,9 @@ router.get('/:id', async (req, res) => {
   })
 
   if (user) {
-    res.json(user)
+    response.json(user)
   } else {
-    res.status(404).end()
+    response.status(404).end()
   }
 })
 
