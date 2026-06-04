@@ -36,6 +36,11 @@ A modern full-stack blogging platform built with React, Node.js, Express, Postgr
 - Umzug Migration Framework
 - Docker
 
+### Testing
+- Playwright
+- Vite
+- supertest
+
 ## Database Setup
 Database was set up through Docker and PSQL
 
