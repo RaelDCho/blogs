@@ -38,7 +38,7 @@ A modern full-stack blogging platform built with React, Node.js, Express, Postgr
 
 ### Testing
 - Playwright
-- Vite
+- Vitest
 - supertest
 
 ## Database Setup
