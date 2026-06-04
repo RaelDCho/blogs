@@ -14,7 +14,7 @@ A modern full-stack blogging platform built with React, Axios, Node.js, Express,
 
 
 ### Admin Features
-- Disabling accounts
+- Enabling/Disabling accounts
 
 
 ## Technology Stack
