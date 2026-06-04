@@ -78,6 +78,7 @@ Install Frontend Dependencies
 | GET | /api/blogs | Retrieve all blogs |
 | GET | /api/blogs/:id | Retrieve a specific blog |
 | POST | /api/blogs | Register a new blog |
+| PUT | /api/blogs/:id | Update a specific blog |
 | DELETE | /api/blogs/:id | Delete a specific blog |
 
 
