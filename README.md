@@ -1,6 +1,6 @@
 # Blog App
 ---
-A modern full-stack blogging platform built with React, Node.js, Express, PostgreSQL, Sequelize, and Umzug. The application allows users to create, edit, publish, and manage blog posts through a secure and responsive web interface.
+A modern full-stack blogging platform built with React, Axios, Node.js, Express, PostgreSQL, Sequelize, and Umzug. The application allows users to create, edit, publish, and manage blog posts through a secure and responsive web interface.
 
 ## Features
 ### User Features
