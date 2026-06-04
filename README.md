@@ -59,11 +59,13 @@ Install Frontend Dependencies
 ## API Endpoints
 ### Authentication
 | Method | Endpoint | Description |
+| ------ | -------- | ----------- |
 | POST | /api/user | Register a new user |
 | POST | /api/login | Authenticate user |
 
 ### Blog Posts
 | Method | Endpoint | Description |
+| ------ | -------- | ----------- |
 | GET | /api/blogs | Retrieve all blogs |
 | GET | /api/blogs/:id | Retrieve a specific blog |
 | POST | /api/blogs | Register a new blog |
