@@ -42,18 +42,27 @@ Database was set up through Docker and PSQL
 
 ## Installation
 Clone Repository
+
 `git clone https://github.com/RaelDCho/blogs.git`
+
 `cd blog-app`
 
 
+
 Install Backend Dependencies
+
 `cd backend`
+
 `npm install`
+
 
 
 Install Frontend Dependencies
+
 `cd ../frontend`
+
 `npm install`
+
 
 
 ## API Endpoints
