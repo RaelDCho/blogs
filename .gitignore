@@ -2,6 +2,8 @@ requests
 .env
 old-index.js
 node_modules
+backend/tests
+back-end
 
 # Playwright
 /test-results/

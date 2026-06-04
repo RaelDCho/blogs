@@ -21,7 +21,7 @@ const UserForm = ({ createUser }) => {
       name: name
     })
 
-    cleanUp()
+    // cleanUp()
   }
 
   const cleanUp = () => {
@@ -69,7 +69,7 @@ const UserForm = ({ createUser }) => {
           <Button variant='outlined'
             style={{ marginRight: 5 }}
             onClick={cleanUp}>cancel</Button>
-          <Button variant='contained' onClick={cleanUp}>create</Button>
+          <Button variant='contained' onClick={createAccount}>create</Button>
         </div>
       </form>
     </Box>

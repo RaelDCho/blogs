@@ -1,7 +1,7 @@
 import { Alert } from '@mui/material'
 import { Check as CheckIcon } from '@mui/icons-material'
 
-const Notification = ({ notification, messageType }) => {
+const Notification = ({ notification }) => {
   if (notification === null) {
     return null
   }
@@ -10,7 +10,7 @@ const Notification = ({ notification, messageType }) => {
     // <div className='notification-message' id={messageType ? 'success' : 'error'}>
     //   <p>{notification ? notification.message : ''}</p>
     // </div>
-    <Alert icon={notification.type === 'success' ? <CheckIcon /> : ''} severity={notification.type} style={{ margin: 10 }}>
+    <Alert icon={notification.type === 'success' ? <CheckIcon /> : ''} severity={notification.type} style={{ margin: 10 }} onClose={() => {}}>
       {notification.text}
     </Alert>
   )

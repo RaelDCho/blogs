@@ -64,10 +64,16 @@ const App = () => {
   // create a user
   const createUser = async userObject => {
     userService.create(userObject).then(response => {
-      // something here
+      setNotification({ text: `User '${userObject.username}' has been successfully created.`, type: 'success'})
+      navigate('/')
     }).catch(error => {
-      setNotification({ text: error, type: 'error' })
+      console.log(error)
+      setNotification({ text: error.message, type: 'error' })
     })
+
+    setTimeout(() => {
+      setNotification(null)
+    }, 3000)
   }
 
   // Login and Logout functions
@@ -89,7 +95,9 @@ const App = () => {
     } catch {
       console.log('error occurred in login')
       setNotification({ text: 'error: invalid credentials', type: 'error' })
-      setTimeout(() => setNotification(null), 3000)
+      setTimeout(() => {
+        setNotification(null)
+      }, 3000)
     }
   }
 
@@ -111,10 +119,12 @@ const App = () => {
       // set notification messages
       setNotification({ text: `added blog ${returnedBlog.title}`, type:'success' })
     }).catch(error => {
-      setNotification({ text: error, type: 'error' })
+      setNotification({ text: error.message, type: 'error' })
     })
 
-    setTimeout(() => { setNotification(null) }, 3000)
+    setTimeout(() => {
+      setNotification(null)
+    }, 3000)
   }
 
   // move to bloglist

@@ -23,9 +23,9 @@ const Togglable = (props) => {
       {props.buttonLabel && <div style={hideWhenVisible}>
         <Button variant='outlined' onClick={toggleVisibility}>{props.buttonLabel}</Button>
       </div>}
-      <Box style={showWhenVisible}>
+      <Box sx={showWhenVisible}>
         {props.children}
-        <Box style={{ display: 'flex' }}>
+        <Box sx={{ display: 'flex' }}>
           <Box sx={{ flexGrow: 1 }}>
             <Button variant='outlined' style={{ margin: 5 }} onClick={toggleVisibility}>Cancel</Button>
           </Box>

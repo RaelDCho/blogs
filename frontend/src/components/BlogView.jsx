@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom'
 
-import { Button } from '@mui/material'
+import { Box, Button } from '@mui/material'
 import { Delete as DeleteIcon, ThumbUpOffAlt as ThumbsUp } from '@mui/icons-material'
 
 const BlogView = ({ blog, user, handleLike, deleteBlog }) => {
@@ -54,13 +54,22 @@ const BlogView = ({ blog, user, handleLike, deleteBlog }) => {
       <div style={blogLine}>
         likes: {blog.likes}
       </div>
-      <div style={blogLine}>
+      {/* <div style={blogLine}>
         <Button variant='outlined' onClick={() => likeBlog(blog.id)}><ThumbsUp /></Button>
       </div>
       <div>
         {user && (user.username === blog.user.username) 
           ? <Button variant='outlined' color='error' startIcon={<DeleteIcon />} onClick={() => removeBlog(blog.id)}>delete</Button> : ''}
-      </div>
+      </div> */}
+      <Box sx={{ display: 'flex' }}>
+        <Box style={blogLine}>
+          <Button variant='outlined' onClick={() => likeBlog(blog.id)}><ThumbsUp /></Button>
+        </Box>
+        <Box style={blogLine}>
+          {user && (user.username === blog.user.username) 
+            ? <Button variant='outlined' color='error' startIcon={<DeleteIcon />} onClick={() => removeBlog(blog.id)}>delete</Button> : ''}
+        </Box>
+      </Box>
     </div>
   )
 }
