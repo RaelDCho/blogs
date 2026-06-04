@@ -125,4 +125,4 @@ Install Frontend Dependencies
   - Content publishing controls
 
 ---
-Developed using React, Node.js, Express, PostgreSQL, Sequelize, and Umzug
+Developed using React, Axios, Node.js, Express, PostgreSQL, Sequelize, and Umzug
