@@ -109,8 +109,6 @@ Install Frontend Dependencies
 - Password Hashing with Bcrypt
 - Protected API Routes
 - Input Validation
-<!-- - Environment Variable Configuration -->
-<!-- - Sequelize Query Parameterization -->
 
 
 ## Future Enhancements
@@ -123,6 +121,7 @@ Install Frontend Dependencies
   - Moderate posts
   - User administration
   - Content publishing controls
+
 
 ---
 Developed using React, Axios, Node.js, Express, PostgreSQL, Sequelize, and Umzug
