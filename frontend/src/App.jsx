@@ -59,7 +59,7 @@ const App = () => {
 
   // useMatch to get id of blog to then pass to Blog component
   const match = useMatch('/blogs/:id')
-  const blog = match ? blogs.find(blog => blog.id === match.params.id) : null
+  const blog = match ? blogs.find(blog => blog.id.toString() === match.params.id) : null
 
   // create a user
   const createUser = async userObject => {

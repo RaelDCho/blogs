@@ -6,8 +6,6 @@ import { Button } from '@mui/material'
 import { Delete as DeleteIcon, ThumbUpOffAlt as ThumbsUp } from '@mui/icons-material'
 
 const Blog = ({ blog, user, handleLike, deleteBlog }) => {
-  // console.log(user.username)
-  // console.log(blog.user.username)
   // functionalities
   const likeBlog = id => {
     if (user) {

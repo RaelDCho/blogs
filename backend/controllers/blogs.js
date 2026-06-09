@@ -65,7 +65,12 @@ router.get('/', async (req, res) => {
 
 // get a single note
 router.get('/:id', blogFinder, async (req, res) => {
-  res.json(req.blog)
+  // res.json(req.blog)
+  try {
+    return res.json(req.blog)
+  } catch(error) {
+    return res.status(400).json({ error })
+  }
 })
 
 router.post('/', tokenExtractor, async (req, res) => {
